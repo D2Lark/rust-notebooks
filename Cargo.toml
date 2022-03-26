@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "gat_01",
+    "gat_02",
+    "type_01",
+]
