@@ -3,4 +3,5 @@ members = [
     "gat_01",
     "gat_02",
     "type_01",
+    "cli_01",
 ]

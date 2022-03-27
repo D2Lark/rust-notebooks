@@ -1,4 +1,6 @@
-use super::array_trait::*;
+pub mod impls;
+pub mod list;
+use crate::array::Array;
 pub trait Scalar: std::fmt::Debug + Clone + Send + Sync + 'static {
     type ArrayType: Array<OwnedItem = Self>;
     type RefType<'a>: ScalarRef<'a, ScalarType = Self, ArrayType = Self::ArrayType>;

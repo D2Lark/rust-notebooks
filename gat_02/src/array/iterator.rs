@@ -1,4 +1,4 @@
-use crate::traits::array_trait::Array;
+use crate::array::Array;
 pub struct ArrayIterator<'a, A: Array> {
     array: &'a A,
     pos: usize,

@@ -1,5 +1,5 @@
-use crate::impls::iterator::ArrayIterator;
-use crate::traits::array_trait::*;
+use crate::array::iterator::ArrayIterator;
+use crate::array::{Array, ArrayBuilder};
 use bitvec::prelude::BitVec;
 #[derive(Clone, Debug)]
 pub struct StringArray {
@@ -13,11 +13,11 @@ impl Array for StringArray {
     type OwnedItem = String;
     type RefItem<'a> = &'a str;
     fn get(&self, idx: usize) -> Option<&str> {
-        if idx >= self.data.len() {
-            None
-        } else {
+        if self.bitmap[idx] {
             let range = self.offset[idx]..self.offset[idx + 1];
             Some(unsafe { std::str::from_utf8_unchecked(&self.data[range]) })
+        } else {
+            None
         }
     }
     fn len(&self) -> usize {
@@ -64,5 +64,30 @@ impl ArrayBuilder for StringArrayBuilder {
             offset: self.offset,
             bitmap: self.bitmap,
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn build_string_array_from_ref() {
+        let mut builder = StringArrayBuilder::with_capacity(10);
+        builder.push(Some("hello"));
+        builder.push(Some("world"));
+        builder.push(Some("!"));
+        builder.push(None);
+        let array = builder.finish();
+        assert_eq!(array.len(), 4);
+        assert_eq!(array.get(0), Some("hello"));
+        assert_eq!(array.get(1), Some("world"));
+        assert_eq!(array.get(2), Some("!"));
+        assert_eq!(array.get(3), None);
+        let mut iter = array.iter();
+        assert_eq!(iter.next().unwrap(), Some("hello"));
+        assert_eq!(iter.next().unwrap(), Some("world"));
+        assert_eq!(iter.next().unwrap(), Some("!"));
+        assert_eq!(iter.next().unwrap(), None);
     }
 }
