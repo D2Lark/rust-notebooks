@@ -1,6 +1,6 @@
 use bytes::Buf;
 use quick_xml::de;
-use serde::Deserialize;
+use serde::{Deserialize, __private::de::StrDeserializer};
 fn main() {
     let bs = bytes::Bytes::from(
         r#" 
@@ -59,7 +59,9 @@ fn main() {
     );
     let out: Output = de::from_reader(bs.reader()).expect("must success");
 
-    println!("{:?}", out);
+
+    assert_eq!(out.blobs.blob.iter().map(|v|v.name.clone()).collect::<Vec<String>>(),["dir1/2f018bb5-466f-4af1-84fa-2b167374ee06", "dir1/b2d96f8b-d467-40d1-bb11-4632dddbf5b5"]);
+    assert_eq!(out.blobs.blob.iter().map(|v|v.properties.content_length.clone()).collect::<Vec<u64>>(),[3485277, 1259677]);
 }
 
 // #[derive(Default, Debug, Deserialize)]
@@ -72,7 +74,6 @@ fn main() {
 #[serde(default, rename_all = "PascalCase")]
 struct Output {
     blobs:Blobs,
-    #[serde(rename = "NextMarker")]
     nextmarker:Option<String>,
 }
 
