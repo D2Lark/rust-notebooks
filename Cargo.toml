@@ -8,4 +8,5 @@ members = [
     "gat_03",
     "xml_01",
     "log_01",
+    "stream_01",
 ]
