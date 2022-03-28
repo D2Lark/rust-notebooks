@@ -7,4 +7,5 @@ members = [
     "macro_01",
     "gat_03",
     "xml_01",
+    "log_01",
 ]
