@@ -17,7 +17,12 @@ async fn main() -> Result<()> {
 }
 
 async fn execute(signer:Signer) -> Result<()> {
-    let mut url = "https://d2lark.blob.core.windows.net/myazurebucket10?restype=container&comp=list";
+    let mut url = "https://d2lark.blob.core.windows.net/myazurebucket?restype=container&comp=list".to_string();
+    
+    let path = "dir1/";
+    if !path.is_empty() {
+        url.push_str(&format!("&prefix={}", path))
+    }
 
     let mut req = hyper::Request::get(url)
         .body(hyper::Body::empty())
@@ -40,7 +45,8 @@ async fn execute(signer:Signer) -> Result<()> {
             bs.put_slice(&b)
         }
 
-        let bs = bs.freeze();
+        let bs = bs.freeze();     
+           println!("{:?}", bs);
         let out = parse_xml(bs);
         println!("{:?}", out);
         Ok(())

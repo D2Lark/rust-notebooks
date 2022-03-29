@@ -4,7 +4,6 @@ members = [
     "gat_02",
     "type_01",
     "cli_01",
-    "macro_01",
     "gat_03",
     "xml_01",
     "log_01",
