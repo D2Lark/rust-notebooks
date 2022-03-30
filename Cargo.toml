@@ -1,11 +1,12 @@
 [workspace]
 members = [
-    "gat_01",
-    "gat_02",
+    "trait_01",
+    "trait_03",
     "type_01",
     "cli_01",
-    "gat_03",
+    "type_exersice",
     "xml_01",
     "log_01",
     "stream_01",
+    "trait_04",
 ]

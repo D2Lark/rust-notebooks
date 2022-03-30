@@ -1,0 +1,1 @@
+trait can be extended. refer [this](https://github.com/risinglightdb/risinglight/blob/main/src/array/primitive_array.rs)
