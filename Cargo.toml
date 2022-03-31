@@ -9,4 +9,5 @@ members = [
     "log_01",
     "stream_01",
     "trait_04",
+    "trait_05",
 ]
