@@ -11,5 +11,6 @@ members = [
     "code_style/trait_05",
     "new_create_playground/type_exersice",
     "new_create_playground/test_case",
-    "new_create_playground/enum_dispatch"
+    "new_create_playground/enum_dispatch",
+    "new_create_playground/futures_async_stream"
 ]
