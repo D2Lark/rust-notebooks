@@ -1,13 +1,15 @@
 [workspace]
 members = [
-    "trait_01",
-    "trait_03",
-    "type_01",
-    "cli_01",
-    "type_exersice",
-    "xml_01",
-    "log_01",
-    "stream_01",
-    "trait_04",
-    "trait_05",
+    "code_style/trait_01",
+    "code_style/trait_03",
+    "code_style/type_01",
+    "code_style/cli_01",
+    "code_style/xml_01",
+    "code_style/log_01",
+    "code_style/stream_01",
+    "code_style/trait_04",
+    "code_style/trait_05",
+    "new_create_playground/type_exersice",
+
+    "new_create_playground/stream_02",
 ]
