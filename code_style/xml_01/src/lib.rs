@@ -1,21 +1,21 @@
+use anyhow::Result;
 use bytes::Buf;
 use quick_xml::de;
-use serde::{Deserialize};
-use anyhow::Result;
+use serde::Deserialize;
 
 #[derive(Default, Debug, Deserialize)]
 #[serde(default, rename_all = "PascalCase")]
 pub struct Output {
-    blobs:Blobs,
+    blobs: Blobs,
     #[serde(rename = "NextMarker")]
-    nextmarker:Option<String>,
+    nextmarker: Option<String>,
 }
 
 #[derive(Default, Debug, Deserialize)]
 #[serde(default, rename_all = "PascalCase")]
 pub struct Blobs {
-#[serde(rename = "Blob", default = "Vec::new")]
-    blob:Vec<Blob>,
+    #[serde(rename = "Blob", default = "Vec::new")]
+    blob: Vec<Blob>,
     pub blob_prefix: Option<Vec<BlobPrefix>>,
 }
 #[derive(Default, Debug, Deserialize)]
@@ -37,13 +37,13 @@ pub struct Properties {
     content_length: u64,
 }
 
-pub fn parse_xml(bytes:bytes::Bytes) -> Result<Output> {
+pub fn parse_xml(bytes: bytes::Bytes) -> Result<Output> {
     let out: Output = de::from_reader(bytes.reader()).expect("must success");
     Ok(out)
 }
 
 #[cfg(test)]
-mod tests{
+mod tests {
     use super::*;
     #[test]
     fn test_parse_xml() {
@@ -137,15 +137,39 @@ mod tests{
         let out: Output = de::from_reader(bs.reader()).expect("must success");
         println!("{:?}", out);
 
-        assert_eq!(out.blobs.blob.iter().map(|v|v.name.clone()).collect::<Vec<String>>(),["dir1/2f018bb5-466f-4af1-84fa-2b167374ee06", "dir1/5b9432b2-79c0-48d8-90c2-7d3e153826ed", "dir1/b2d96f8b-d467-40d1-bb11-4632dddbf5b5"]);
-        assert_eq!(out.blobs.blob.iter().map(|v|v.properties.content_length.clone()).collect::<Vec<u64>>(),[3485277, 2471869, 1259677]);
-      assert_eq!(out.blobs.blob_prefix.unwrap().iter().map(|v|v.name.clone()).collect::<Vec<String>>(),["dir1/dir2/", "dir1/dir21/"]);
+        assert_eq!(
+            out.blobs
+                .blob
+                .iter()
+                .map(|v| v.name.clone())
+                .collect::<Vec<String>>(),
+            [
+                "dir1/2f018bb5-466f-4af1-84fa-2b167374ee06",
+                "dir1/5b9432b2-79c0-48d8-90c2-7d3e153826ed",
+                "dir1/b2d96f8b-d467-40d1-bb11-4632dddbf5b5"
+            ]
+        );
+        assert_eq!(
+            out.blobs
+                .blob
+                .iter()
+                .map(|v| v.properties.content_length)
+                .collect::<Vec<u64>>(),
+            [3485277, 2471869, 1259677]
+        );
+        assert_eq!(
+            out.blobs
+                .blob_prefix
+                .unwrap()
+                .iter()
+                .map(|v| v.name.clone())
+                .collect::<Vec<String>>(),
+            ["dir1/dir2/", "dir1/dir21/"]
+        );
     }
-// #[derive(Default, Debug, Deserialize)]
-// #[serde(default, rename_all = "PascalCase")]
-// struct Output {
-//     blobs:Blob,
-// }
-
-
+    // #[derive(Default, Debug, Deserialize)]
+    // #[serde(default, rename_all = "PascalCase")]
+    // struct Output {
+    //     blobs:Blob,
+    // }
 }

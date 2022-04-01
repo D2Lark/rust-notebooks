@@ -1,4 +1,4 @@
-use log::{info, trace, warn,debug,error};
+use log::{debug, error, info, trace, warn};
 fn main() {
     env_logger::init();
     info!("Hello, world!");

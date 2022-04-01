@@ -1,18 +1,21 @@
-
-pub trait Actor{
-    fn training(&self,child:Child) {
+pub trait Actor {
+    fn training(&self, child: Child) {
         match child {
-            Child::Boy(boy) => {println!("Teaching {:?} Sing :{}",boy,<Self as Actor>::sing())}
-            Child::Girl(girl) =>{println!("Teaching {:?} Sing :{}",girl,<Self as Actor>::dance())}
+            Child::Boy(boy) => {
+                println!("Teaching {:?} Sing :{}", boy, <Self as Actor>::sing())
+            }
+            Child::Girl(girl) => {
+                println!("Teaching {:?} Sing :{}", girl, <Self as Actor>::dance())
+            }
         }
     }
-    fn sing() -> String{
+    fn sing() -> String {
         String::from("lalala")
     }
-    fn dance() -> String{
+    fn dance() -> String {
         String::from("dancing")
     }
-    fn act(&self) -> String{
+    fn act(&self) -> String {
         (<Self as Actor>::sing() + " " + &<Self as Actor>::dance()).to_string()
     }
 }
@@ -26,7 +29,7 @@ impl Actor for Man {
     }
 }
 impl Actor for Woman {
-    fn dance() -> String{
+    fn dance() -> String {
         String::from("dengdengdeng")
     }
 }
@@ -35,25 +38,20 @@ pub struct Boy;
 #[derive(Debug)]
 pub struct Girl;
 
-
-pub enum Child{
+pub enum Child {
     Boy(Boy),
     Girl(Girl),
 }
-fn main(){
+fn main() {
     let m = Man;
-    let wm = Woman;   
+    let wm = Woman;
     let boy = Boy;
     let girl = Girl;
-    interview(m,Child::Boy(boy));
-    interview(wm,Child::Girl(girl));
-    
-    
-
+    interview(m, Child::Boy(boy));
+    interview(wm, Child::Girl(girl));
 }
 
-pub fn interview<T:Actor>(a:T,child:Child){
-    println!("{}",a.act());
+pub fn interview<T: Actor>(a: T, child: Child) {
+    println!("{}", a.act());
     a.training(child);
 }
-

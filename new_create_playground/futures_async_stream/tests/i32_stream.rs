@@ -1,13 +1,9 @@
 #![feature(generators, proc_macro_hygiene, stmt_expr_attributes)]
-use futures::{
-    stream::Stream,
-
-};
-use futures_async_stream::{for_await, stream, stream_block};
-use tokio::time::{Duration,sleep};
+use futures::stream::Stream;
+use futures_async_stream::{for_await, stream};
+use tokio::time::{sleep, Duration};
 #[tokio::test]
-async fn i32_test(){
-
+async fn i32_test() {
     #[for_await]
     for x in bar(foo()) {
         println!("resutl is {}", x);

@@ -1,11 +1,10 @@
-
 use clap::Parser;
 use minitrace::prelude::*;
 use tokio::time::{sleep, Duration};
 #[derive(Parser, Debug)]
 struct Args {
     /// Whether to enable tracing
-    #[clap(long,short)]
+    #[clap(long, short)]
     enable_tracing: bool,
 }
 
@@ -16,18 +15,24 @@ async fn main() {
     if enable_tracing {
         let (root, collector) = Span::root("root");
         async {
-            sql_run().in_span(Span::enter_with_local_parent("sql running")).await;
-            parsing().in_span(Span::enter_with_local_parent("parsing running")).await;
-            execution().in_span(Span::enter_with_local_parent("execution  running")).await;
-        }.in_span(root).await;
-        
+            sql_run()
+                .in_span(Span::enter_with_local_parent("sql running"))
+                .await;
+            parsing()
+                .in_span(Span::enter_with_local_parent("parsing running"))
+                .await;
+            execution()
+                .in_span(Span::enter_with_local_parent("execution  running"))
+                .await;
+        }
+        .in_span(root)
+        .await;
+
         let records: Vec<SpanRecord> = collector.collect().await;
         println!("records:{records:?}");
-    }else {
+    } else {
         sql_run().await;
     }
-
-    
 }
 
 async fn sql_run() {
