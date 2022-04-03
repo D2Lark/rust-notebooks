@@ -1,9 +1,9 @@
 #![feature(generators, proc_macro_hygiene, stmt_expr_attributes)]
-use futures::stream::{Stream, self};
-use futures_async_stream::{for_await, stream};
-use tokio::time::{sleep, Duration};
-use tokio::pin;
+use futures::stream::{self, Stream};
 use futures::StreamExt;
+use futures_async_stream::{for_await, stream};
+use tokio::pin;
+use tokio::time::{sleep, Duration};
 #[tokio::test]
 async fn i32_test() {
     // #[for_await]
@@ -15,7 +15,7 @@ async fn i32_test() {
     while let Some(x) = stream.next().await {
         println!("resutl is {}", x);
     }
-}   
+}
 
 fn foo() -> impl Stream<Item = i32> {
     #[stream]
