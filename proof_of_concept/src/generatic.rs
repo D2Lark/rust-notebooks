@@ -42,7 +42,10 @@ pub enum Child {
     Boy(Boy),
     Girl(Girl),
 }
-fn main() {
+#[cfg(test)]
+mod tests {
+    #[test]
+fn test() {
     let m = Man;
     let wm = Woman;
     let boy = Boy;
@@ -54,4 +57,5 @@ fn main() {
 pub fn interview<T: Actor>(a: T, child: Child) {
     println!("{}", a.act());
     a.training(child);
+}
 }

@@ -1,12 +1,24 @@
 [package]
-name = "xml_01"
+name = "proof_of_concept"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+clap = { version = "3", features = ["derive"] }
+minitrace = "0.4.0"
+tokio = { version = "1", features = ["full"] }
+tokio-stream = "0.1"
+futures-async-stream = "0.2"
+async-stream = "0.3"
+
+# quick xml
 quick-xml = { version = "0.22.0", features = ["serialize"] }
 serde = { version = "1.0.136", features = ["derive"] }
 bytes = "1"
 anyhow = "1"
+
+#log
+log = "0.4"
+env_logger = "0.9"

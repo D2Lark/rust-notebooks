@@ -1,18 +1,10 @@
 [workspace]
 members = [
-    "proof_of_concept/trait_01",
-    "proof_of_concept/trait_03",
-    "proof_of_concept/type_01",
-    "proof_of_concept/cli_01",
-    "proof_of_concept/xml_01",
-    "proof_of_concept/log_01",
-    "proof_of_concept/stream_01",
-    "proof_of_concept/trait_04",
-    "proof_of_concept/trait_05",
-        "proof_of_concept/iter_01",
+    "proof_of_concept",
     "new_create_playground/type_exersice",
     "new_create_playground/test_case",
     "new_create_playground/enum_dispatch",
     "new_create_playground/futures_async_stream",
     "new_create_playground/tokio",
+        "new_create_playground/macro",
 ]

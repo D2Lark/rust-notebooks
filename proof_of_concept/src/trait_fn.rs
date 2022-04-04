@@ -46,23 +46,28 @@ impl Wife for ChineseWoman {
         }
     }
 }
-fn main() {
-    let mut cm = ChineseMan {
-        name: "zhangsan".to_string(),
-        partner_name: None,
-    };
-    let mut cwm = ChineseWoman {
-        name: "lisi".to_string(),
-        partner_name: None,
-    };
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn test() {
+        let mut cm = ChineseMan {
+            name: "zhangsan".to_string(),
+            partner_name: None,
+        };
+        let mut cwm = ChineseWoman {
+            name: "lisi".to_string(),
+            partner_name: None,
+        };
 
-    church(&mut cm, &mut cwm);
-    println!("after married");
-    println!("{:?}", cm.who_is_my_partner());
-    println!("{:?}", cwm.who_is_my_partner());
-}
+        church(&mut cm, &mut cwm);
+        println!("after married");
+        println!("{:?}", cm.who_is_my_partner());
+        println!("{:?}", cwm.who_is_my_partner());
+    }
 
-pub fn church(cm: &mut ChineseMan, cwm: &mut ChineseWoman) {
-    cm.get_marry(cwm);
-    cwm.get_marry(cm);
+    pub fn church(cm: &mut ChineseMan, cwm: &mut ChineseWoman) {
+        cm.get_marry(cwm);
+        cwm.get_marry(cm);
+    }
 }

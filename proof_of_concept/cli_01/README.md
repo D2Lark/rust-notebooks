@@ -1,1 +1,0 @@
-测试 如何不破坏db 入口函数的情况下实现异步 clap enable minitrace refer this [PR](https://github.com/risinglightdb/risinglight/pull/586/files#diff-233d1cbde5ff3dcecb2c5fc7f011f30306c37d3ea2217bd818b13de46c49cd8b)

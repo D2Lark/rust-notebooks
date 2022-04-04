@@ -1,7 +1,7 @@
 #![feature(generators, proc_macro_hygiene, stmt_expr_attributes)]
-use futures::stream::{self, Stream};
+use futures::stream::Stream;
 use futures::StreamExt;
-use futures_async_stream::{for_await, stream};
+use futures_async_stream::stream;
 use tokio::pin;
 use tokio::time::{sleep, Duration};
 #[tokio::test]
