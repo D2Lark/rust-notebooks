@@ -1,50 +1,43 @@
-use anyhow::Result;
-use bytes::Buf;
-use quick_xml::de;
-use serde::Deserialize;
-
-#[derive(Default, Debug, Deserialize)]
-#[serde(default, rename_all = "PascalCase")]
-pub struct Output {
-    blobs: Blobs,
-    #[serde(rename = "NextMarker")]
-    nextmarker: Option<String>,
-}
-
-#[derive(Default, Debug, Deserialize)]
-#[serde(default, rename_all = "PascalCase")]
-pub struct Blobs {
-    #[serde(rename = "Blob", default = "Vec::new")]
-    blob: Vec<Blob>,
-    pub blob_prefix: Option<Vec<BlobPrefix>>,
-}
-#[derive(Default, Debug, Deserialize)]
-#[serde(default, rename_all = "PascalCase")]
-pub struct BlobPrefix {
-    pub name: String,
-}
-#[derive(Default, Debug, Deserialize)]
-#[serde(default, rename_all = "PascalCase")]
-pub struct Blob {
-    properties: Properties,
-    name: String,
-}
-
-#[derive(Default, Debug, Deserialize)]
-#[serde(default, rename_all = "PascalCase")]
-pub struct Properties {
-    #[serde(rename = "Content-Length")]
-    content_length: u64,
-}
-
-pub fn parse_xml(bytes: bytes::Bytes) -> Result<Output> {
-    let out: Output = de::from_reader(bytes.reader()).expect("must success");
-    Ok(out)
-}
-
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use bytes::Buf;
+    use quick_xml::de;
+    use serde::Deserialize;
+
+    #[derive(Default, Debug, Deserialize)]
+    #[serde(default, rename_all = "PascalCase")]
+    pub struct Output {
+        blobs: Blobs,
+        #[serde(rename = "NextMarker")]
+        nextmarker: Option<String>,
+    }
+
+    #[derive(Default, Debug, Deserialize)]
+    #[serde(default, rename_all = "PascalCase")]
+    pub struct Blobs {
+        #[serde(rename = "Blob", default = "Vec::new")]
+        blob: Vec<Blob>,
+        pub blob_prefix: Option<Vec<BlobPrefix>>,
+    }
+    #[derive(Default, Debug, Deserialize)]
+    #[serde(default, rename_all = "PascalCase")]
+    pub struct BlobPrefix {
+        pub name: String,
+    }
+    #[derive(Default, Debug, Deserialize)]
+    #[serde(default, rename_all = "PascalCase")]
+    pub struct Blob {
+        properties: Properties,
+        name: String,
+    }
+
+    #[derive(Default, Debug, Deserialize)]
+    #[serde(default, rename_all = "PascalCase")]
+    pub struct Properties {
+        #[serde(rename = "Content-Length")]
+        content_length: u64,
+    }
+
     #[test]
     fn test_parse_xml() {
         let bs = bytes::Bytes::from(

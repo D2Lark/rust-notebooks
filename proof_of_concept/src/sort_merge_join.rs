@@ -1,11 +1,9 @@
-use std::{result, vec};
 #[cfg(test)]
-mod tests
-{
+mod tests {
     #[test]
-    fn main() {
+    fn test() {
         let strs_a = vec!["123", "456", "789"];
-        let strs_b = vec!["1","35", "68"];
+        let strs_b = vec!["1", "35", "68"];
         let mut chars_a = strs_a.iter().flat_map(|f| f.chars()).peekable();
         let mut chars_b = strs_b.iter().flat_map(|f| f.chars()).peekable();
         let mut a = chars_a.next().unwrap();
@@ -40,4 +38,3 @@ mod tests
         println!("result:{:?}", result);
     }
 }
-
