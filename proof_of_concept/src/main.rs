@@ -7,8 +7,9 @@ mod log_env;
 mod minitrace_cli;
 mod quick_xml;
 mod sort_merge_join;
-mod stream_flatmap;
+mod stream_flatmap; 
 mod trait_fn;
+mod plan_visitor;
 fn main() {
     println!("Hello, world!");
 }

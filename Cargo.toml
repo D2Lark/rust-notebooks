@@ -6,5 +6,6 @@ members = [
     "new_create_playground/enum_dispatch",
     "new_create_playground/futures_async_stream",
     "new_create_playground/tokio",
-        "new_create_playground/macro",
+    "new_create_playground/macro",
+    "new_create_playground/executor",
 ]
