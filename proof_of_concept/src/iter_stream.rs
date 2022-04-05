@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod test {
-    use futures::{ StreamExt};
+    use futures::StreamExt;
     use futures_async_stream::{for_await, try_stream};
     #[tokio::test]
     async fn test() {
